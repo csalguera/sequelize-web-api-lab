@@ -71,6 +71,23 @@ const indexAlbums = async (req, res) => {
   }
 }
 
+const updateAlbum = async (req, res) => {
+  try {
+    const album = await Album.update(
+      req.body,
+      { where: {
+          artistId: req.params.id,
+          id: req.params.aId 
+        },
+        returning: true
+      }
+    )
+    res.status(200).json(album)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 module.exports = {
   create,
   index,
@@ -78,4 +95,5 @@ module.exports = {
   delete: deleteArtist,
   addAlbum,
   indexAlbums,
+  updateAlbum,
 }
