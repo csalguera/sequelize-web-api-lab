@@ -94,14 +94,17 @@ const updateAlbum = async (req, res) => {
 
 const deleteAlbum = async (req, res) => {
   try {
-    const albums = await Album.destroy(
-      { where: {
-          artistId: req.params.id,
-          id: req.params.aId
-        }
-      }
-    )
-    res.status(200).json(albums)
+    const album = await Album.findByPk(req.params.aId)
+    album.destroy()
+    res.status(200).json(album)
+    // const albums = await Album.destroy(
+    //   { where: {
+    //       artistId: req.params.id,
+    //       id: req.params.aId
+    //     }
+    //   }
+    // )
+    // res.status(200).json(albums)
   } catch (error) {
     res.status(500).json(error)
   }
