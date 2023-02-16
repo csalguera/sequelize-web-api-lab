@@ -11,7 +11,9 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const artists = await Artist.findAll()
+    const artists = await Artist.findAll({
+      include: [{ model: Album, as: 'albums' }]
+    })
     res.status(200).json(artists)
   } catch (error) {
     res.status(500).json(error)
