@@ -36,10 +36,13 @@ const update = async (req, res) => {
 
 const deleteArtist = async (req, res) => {
   try {
-    const artists = Artist.destroy(
-      { where: { id: req.params.id } }
-    )
-    res.status(200).json(artists)
+    const artist = await Artist.findByPk(req.params.id)
+    artist.destroy()
+    res.status(200).json(artist)
+    // const artists = await Artist.destroy(
+    //   { where: { id: req.params.id } }
+    // )
+    // res.status(200).json(artists)
   } catch (error) {
     res.status(500).json(error)
   }
