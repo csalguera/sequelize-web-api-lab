@@ -8,5 +8,6 @@ router.get('/:id/albums', artistsCtrl.indexAlbums)
 router.put('/:id', artistsCtrl.update)
 router.put('/:id/albums/:aId', artistsCtrl.updateAlbum)
 router.delete('/:id', artistsCtrl.delete)
+router.delete('/:id/albums/:aId', artistsCtrl.deleteAlbum)
 
 module.exports = router
