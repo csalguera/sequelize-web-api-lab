@@ -60,10 +60,22 @@ const addAlbum = async (req, res) => {
   }
 }
 
+const indexAlbums = async (req, res) => {
+  try {
+    const albums = await Album.findAll(
+      { where: { artistId: req.params.id } }
+    )
+    res.status(200).json(albums)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 module.exports = {
   create,
   index,
   update,
   delete: deleteArtist,
   addAlbum,
+  indexAlbums,
 }
