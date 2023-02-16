@@ -1,4 +1,4 @@
-const { Artist } = require('../models')
+const { Artist, Album } = require('../models')
 
 const create = async (req, res) => {
   try {
@@ -48,9 +48,20 @@ const deleteArtist = async (req, res) => {
   }
 }
 
+const addAlbum = async (req, res) => {
+  try {
+    req.body.artistId = req.params.id
+    const album = await Album.create(req.body)
+    res.status(200).json(album)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 module.exports = {
   create,
   index,
   update,
   delete: deleteArtist,
+  addAlbum,
 }
